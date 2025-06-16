@@ -1,0 +1,55 @@
+<script lang="ts">
+	import { Handle, Position, type NodeProps } from "@xyflow/svelte";
+	import type { ConnectionNodeProps } from "$components/types/NodeProps";
+	import Icon from "@iconify/svelte";
+
+	let { isConnectable, id, data }: ConnectionNodeProps = $props();
+
+	let bgColor: string = data.bgColor || "gray";
+	let color: string = data.iconColor || "white";
+	let icon = data.icon || "mdi:database";
+	let description: string = data.description || "Some Description";
+	let title: string = data.title || "Some Title";
+</script>
+
+<Handle type="target" position={Position.Left} {isConnectable} />
+<div class="node-container">
+	<div class="node-icon" style:background-color={bgColor}>
+		<Icon {icon} height="100%" {color} />
+	</div>
+	<div class="node-inforamtion">
+		<h1 class="node-title">{title}</h1>
+
+		<h2 class="node-description">{description}</h2>
+	</div>
+</div>
+<Handle type="source" position={Position.Right} {isConnectable} />
+
+<style>
+	.node-container {
+		background-color: white;
+		border-radius: 1em;
+		display: flex;
+		align-items: center;
+		width: fit-content;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+		overflow: hidden;
+		gap: 1em;
+	}
+	.node-inforamtion {
+		padding: 0.1em;
+	}
+	.node-inforamtion .node-description {
+		color: gray;
+		font-size: 1em;
+	}
+	.node-inforamtion .node-title {
+		font-size: 2em;
+		color: rgb(0, 0, 0);
+		font-weight: bold;
+	}
+	.node-icon {
+		width: 20%;
+		height: 100%;
+	}
+</style>
