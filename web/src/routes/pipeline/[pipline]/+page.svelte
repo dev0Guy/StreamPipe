@@ -1,13 +1,22 @@
-<script>
+<script lang="ts">
   import "@xyflow/svelte/dist/style.css";
   import { Background, SvelteFlow } from "@xyflow/svelte";
-  import Node from "$lib/components/ui/pipeline/Node.svelte";
   import * as ContextMenu from "$lib/components/ui/context-menu";
-  let { data } = $props();
+  import type { Edge, Node } from "@xyflow/svelte";
+  import * as Element from "$lib/components/ui/pipeline/Node.svelte";
+
+  let {
+    data,
+  }: {
+    data: {
+      nodes: Node[];
+      edges: Edge[];
+    };
+  } = $props();
 
   let nodes = $state.raw(data.nodes);
   let edges = $state.raw(data.edges);
-  const nodeTypes = { PiplineElement: Node };
+  const nodeTypes = { PiplineElement: Element.default };
 </script>
 
 <ContextMenu.Root>

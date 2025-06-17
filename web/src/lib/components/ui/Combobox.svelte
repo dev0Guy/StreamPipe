@@ -7,19 +7,21 @@
     import { Button } from "$lib/components/ui/button/index.js";
     import { cn } from "$lib/utils.js";
 
-    interface ComboboxProps {
-        options: {
-            value: string;
-            label: string;
-        }[];
-        searchPlaceholder?: string;
-    }
-
-    const { options, searchPlaceholder = "option" }: ComboboxProps = $props();
+    const {
+        options,
+        searchPlaceholder = "option",
+        selectedIndex,
+        onElementSelect,
+        ...rest
+    } = $props();
 
     let open = $state(false);
-    let value = $state("");
     let triggerRef = $state<HTMLButtonElement>(null!);
+    let value = $state(
+        selectedIndex !== undefined
+            ? (options[selectedIndex]?.value ?? "")
+            : "",
+    );
 
     const selectedValue = $derived(
         options.find((f) => f.value === value)?.label,
@@ -60,8 +62,10 @@
                     {#each options as option}
                         <Command.Item
                             value={option.value}
+                            {...rest}
                             onSelect={() => {
                                 value = option.value;
+                                onElementSelect?.(option);
                                 closeAndFocusTrigger();
                             }}
                         >

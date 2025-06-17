@@ -5,8 +5,11 @@
 
     import * as NavigationMenu from "$lib/components/ui/navigation-menu/index.js";
     import SearchCommand from "$lib/components/ui/pipeline/SearchCommand.svelte";
-    import Button from "$lib/components/ui/button/button.svelte";
-    let isMenuOpen = $state(true);
+    import { Search } from "lucide-svelte";
+    import { clickOutside } from "$lib/utils/eventHandlers/clickOutside";
+    import { goto } from "$app/navigation";
+
+    let isMenuOpen = $state(false);
     const isMac = navigator.platform.toUpperCase().includes("MAC");
 
     function onKeydown(event: KeyboardEvent) {
@@ -28,21 +31,8 @@
         isMenuOpen = !isMenuOpen;
     }
 
-    let { children } = $props();
-    let options = $state([
-        {
-            value: "1",
-            label: "1",
-        },
-        {
-            value: "2",
-            label: "2",
-        },
-        {
-            value: "3",
-            label: "3",
-        },
-    ]);
+    let { children, data } = $props();
+    let options = $state(data.options);
 </script>
 
 <svelte:window on:keydown={onKeydown} />
@@ -53,20 +43,27 @@
 >
     <NavigationMenu.List class="flex items-center justify-between gap-4">
         <NavigationMenu.Item>
-            <Combobox {options} searchPlaceholder="pipline" />
+            <Combobox
+                {options}
+                selectedIndex={data.selectedIdx}
+                searchPlaceholder="pipline"
+                onElementSelect={(option) => goto(option.value)}
+            />
         </NavigationMenu.Item>
         <NavigationMenu.Item>
             <NavigationMenu.Link>
                 {#snippet child()}
-                    <button
+                    <Search
                         class="{navigationMenuTriggerStyle()} cursor-pointer"
-                        onclick={onSearchClick}>Search</button
-                    >
+                        onclick={onSearchClick}
+                    />
                 {/snippet}
             </NavigationMenu.Link>
         </NavigationMenu.Item>
     </NavigationMenu.List>
 </NavigationMenu.Root>
 {#if isMenuOpen}
-    <SearchCommand />
+    <div use:clickOutside={() => (isMenuOpen = false)}>
+        <SearchCommand />
+    </div>
 {/if}
