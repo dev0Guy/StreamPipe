@@ -1,9 +1,16 @@
 <script lang="ts">
+  import {
+    SvelteFlow,
+    Controls,
+    type Node,
+    type Edge,
+    Background,
+  } from "@xyflow/svelte";
   import "@xyflow/svelte/dist/style.css";
-  import { Background, SvelteFlow } from "@xyflow/svelte";
+
   import * as ContextMenu from "$lib/components/ui/context-menu";
-  import type { Edge, Node } from "@xyflow/svelte";
-  import * as Element from "$lib/components/ui/pipeline/Node.svelte";
+  import NodeElement from "$lib/components/ui/pipeline/NodeElement.svelte";
+  import "@xyflow/svelte/dist/style.css";
 
   let {
     data,
@@ -14,11 +21,12 @@
     };
   } = $props();
 
-  let nodes = $state.raw(data.nodes);
-  let edges = $state.raw(data.edges);
-  const nodeTypes = { PiplineElement: Element.default };
+  let nodes = $state.raw<Node[]>(data.nodes);
+  let edges = $state.raw<Edge[]>(data.edges);
+  const nodeTypes = { PiplineElement: NodeElement };
 </script>
 
+<!-- TODO: add select of dark of light mode and change the background color a cordingly -->
 <ContextMenu.Root>
   <ContextMenu.Trigger>
     <div style:width="100vw" style:height="100vh">
@@ -29,7 +37,7 @@
         fitView
         proOptions={{ hideAttribution: true }}
       >
-        <Background bgColor="#1e272e" />
+        <Background bgColor="transparent" />
       </SvelteFlow>
     </div>
   </ContextMenu.Trigger>

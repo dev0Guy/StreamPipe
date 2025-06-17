@@ -1,24 +1,81 @@
 <script lang="ts">
-	import Icon from "@iconify/svelte";
-	import { Card, CardContent } from "$lib/components/ui/card";
+	import { Handle, Position, type NodeProps } from "@xyflow/svelte";
+
 	import * as ContextMenu from "$lib/components/ui/context-menu";
 	import Trash2Icon from "@lucide/svelte/icons/trash-2";
 	import PencilIcon from "@lucide/svelte/icons/pencil";
+	import CircleOffIcon from "@lucide/svelte/icons/circle-off";
 	import EyeIcon from "@lucide/svelte/icons/eye";
 
-	export let icon = "mdi:database";
-	export let title = "Some Title";
-	export let description =
-		"Some very long description that should be truncated gracefully";
+	// export let icon = "mdi:database";
+	// export let title = "Some Title";
+	// export let description =
+	// 	"Some very long description that should be truncated gracefully";
+	import { iconMap } from "$lib/util/iconMap";
+
+	let { isConnectable, id, data } = $props();
+	let Icon = iconMap[data.iconName] || CircleOffIcon;
+	let title = data.title;
+	let description = data.description;
 </script>
+
+<Handle type="source" position={Position.Right} {isConnectable} />
 
 <ContextMenu.Root>
 	<div on:contextmenu={(e) => e.stopPropagation()} role="presentation">
 		<ContextMenu.Trigger>
-			<Card
-				class="flex items-center rounded-2xl overflow-hidden shadow-md w-fit bg-white dark:bg-zinc-900"
+			<div
+				class="flex rounded-md overflow-hidden bg-white dark:bg-zinc-900 gap-4 border border-zinc-400 dark:border-zinc-600
+         w-full max-w-md h-16
+         sm:max-w-lg
+         md:max-w-xl
+         lg:max-w-2xl"
 			>
+				<!-- TODO Add dynamic background color to icon -->
 				<div
+					style:background-color="gray"
+					class="flex items-center justify-center w-15"
+				>
+					<Icon size="80%" class="text-white" />
+				</div>
+				<div
+					class="min-w-[100px] max-w-[300px] flex flex-col justify-center pr-4"
+				>
+					<h2
+						class="text-base font-semibold text-black dark:text-white"
+					>
+						{title}
+					</h2>
+					<p
+						class="text-sm text-zinc-600 dark:text-zinc-400 truncate"
+					>
+						{description}
+					</p>
+				</div>
+			</div>
+		</ContextMenu.Trigger>
+	</div>
+	<ContextMenu.Content>
+		<ContextMenu.Item>
+			<EyeIcon />
+			<span>View</span>
+		</ContextMenu.Item>
+		<ContextMenu.Item>
+			<PencilIcon />
+			<span>Edit</span>
+		</ContextMenu.Item>
+
+		<hr class="my-1 border-t border-zinc-200 dark:border-zinc-700" />
+		<ContextMenu.Item>
+			<Trash2Icon />
+			<span class="text-red-500">Delete</span>
+		</ContextMenu.Item>
+	</ContextMenu.Content>
+</ContextMenu.Root>
+
+<Handle type="source" position={Position.Right} {isConnectable} />
+
+<!-- <div
 					class="bg-zinc-200 dark:bg-zinc-800 p-4 h-full flex items-center justify-center"
 				>
 					<Icon
@@ -40,29 +97,8 @@
 						title={description}
 					>
 						{description}
-					</p>
-				</CardContent>
-			</Card>
-		</ContextMenu.Trigger>
-	</div>
-
-	<ContextMenu.Content>
-		<ContextMenu.Item>
-			<EyeIcon />
-			<span>View</span>
-		</ContextMenu.Item>
-		<ContextMenu.Item>
-			<PencilIcon />
-			<span>Edit</span>
-		</ContextMenu.Item>
-
-		<hr class="my-1 border-t border-zinc-200 dark:border-zinc-700" />
-		<ContextMenu.Item>
-			<Trash2Icon />
-			<span class="text-red-500">Delete</span>
-		</ContextMenu.Item>
-	</ContextMenu.Content>
-</ContextMenu.Root>
+					</p> 
+				</CardContent>-->
 
 <!-- <script lang="ts">
 	import { Handle, Position, type NodeProps } from "@xyflow/svelte";

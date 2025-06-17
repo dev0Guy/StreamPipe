@@ -1,7 +1,8 @@
 <script>
   import "@xyflow/svelte/dist/style.css";
   import { Background, SvelteFlow } from "@xyflow/svelte";
-  import Node from "$lib/components/ui/pipeline/Node.svelte";
+
+  import NodeElement from "$lib/components/ui/pipeline/NodeElement.svelte";
 
   let nodes = $state.raw([
     {
@@ -19,7 +20,7 @@
   ]);
 
   let edges = $state.raw([{ id: "e1-2", source: "1", target: "2" }]);
-  const nodeTypes = { graphConnectorNode: Node };
+  const nodeTypes = { graphConnectorNode: NodeElement };
 </script>
 
 <div style:width="100vw" style:height="100vh">

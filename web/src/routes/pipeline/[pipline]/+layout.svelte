@@ -6,8 +6,10 @@
     import * as NavigationMenu from "$lib/components/ui/navigation-menu/index.js";
     import SearchCommand from "$lib/components/ui/pipeline/SearchCommand.svelte";
     import { Search } from "lucide-svelte";
-    import { clickOutside } from "$lib/utils/eventHandlers/clickOutside";
+    import { clickOutside } from "$lib/util/eventHandlers/clickOutside.js";
     import { goto } from "$app/navigation";
+    import ToggleModeToggle from "$lib/components/ui/button/ToggleModeToggle.svelte";
+    import { Button } from "$lib/components/ui/button/index.js";
 
     let isMenuOpen = $state(false);
     const isMac = navigator.platform.toUpperCase().includes("MAC");
@@ -43,6 +45,9 @@
 >
     <NavigationMenu.List class="flex items-center justify-between gap-4">
         <NavigationMenu.Item>
+            <ToggleModeToggle />
+        </NavigationMenu.Item>
+        <NavigationMenu.Item>
             <Combobox
                 {options}
                 selectedIndex={data.selectedIdx}
@@ -52,12 +57,14 @@
         </NavigationMenu.Item>
         <NavigationMenu.Item>
             <NavigationMenu.Link>
-                {#snippet child()}
-                    <Search
-                        class="{navigationMenuTriggerStyle()} cursor-pointer"
-                        onclick={onSearchClick}
-                    />
-                {/snippet}
+                <Button
+                    onclick={onSearchClick}
+                    variant="outline"
+                    size="icon"
+                    class="cursor-pointer"
+                >
+                    <Search />
+                </Button>
             </NavigationMenu.Link>
         </NavigationMenu.Item>
     </NavigationMenu.List>
@@ -67,3 +74,9 @@
         <SearchCommand />
     </div>
 {/if}
+
+<style>
+    :global(.svelte-flow) {
+        background-color: var(--bg-color) !important;
+    }
+</style>

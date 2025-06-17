@@ -1,8 +1,10 @@
+
+
 export const nodes: object[] = [
   {
     id: "1",
     position: { x: 0, y: 0 },
-    data: { label: "1", type: "Topic", name: "Inside" },
+    data: { title: "Topic", description: "Inside", iconName: "Route" },
     type: "PiplineElement",
   },
   {
