@@ -38,6 +38,7 @@
         proOptions={{ hideAttribution: true }}
       >
         <Background bgColor="transparent" />
+        <Controls buttonBgColor="transparent" showLock={false} />
       </SvelteFlow>
     </div>
   </ContextMenu.Trigger>
@@ -45,3 +46,9 @@
     <ContextMenu.Item>Add Element</ContextMenu.Item>
   </ContextMenu.Content>
 </ContextMenu.Root>
+
+<style>
+  :global(.svelte-flow) {
+    background-color: var(--bg-color) !important;
+  }
+</style>

@@ -74,9 +74,3 @@
         <SearchCommand />
     </div>
 {/if}
-
-<style>
-    :global(.svelte-flow) {
-        background-color: var(--bg-color) !important;
-    }
-</style>

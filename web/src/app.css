@@ -3,6 +3,23 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+.svelte-flow__controls button {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--secondary);
+  border-bottom: none;
+}
+.svelte-flow__controls button:last-child {
+  border-bottom: 1px solid var(--secondary);
+  border-radius: 0 0 5px 5px;
+}
+
+.svelte-flow__controls button:hover {
+  background-color: var(--secondary);
+}
+
+
+
 
 :root {
   --radius: 0.625rem;
