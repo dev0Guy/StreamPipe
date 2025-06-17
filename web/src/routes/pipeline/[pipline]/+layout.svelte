@@ -70,26 +70,3 @@
 {#if isMenuOpen}
     <SearchCommand />
 {/if}
-
-<!-- 
-<NavigationMenu.Root
-    class="absolute top-0 left-0 w-full z-50 px-4 py-2 bg-white dark:bg-zinc-900 shadow-md"
->
-    <NavigationMenu.List>
-        <Collapsible.Root>
-            <Collapsible.Trigger
-                >Can I use this in my project?</Collapsible.Trigger
-            >
-            <Collapsible.Content>
-                Yes. Free to use for personal and commercial projects. No
-                attribution required.
-            </Collapsible.Content>
-        </Collapsible.Root>
-        <NavigationMenu.Item>
-            <NavigationMenu.Trigger>Item One</NavigationMenu.Trigger>
-            <NavigationMenu.Content>
-                <NavigationMenu.Link>Link</NavigationMenu.Link>
-            </NavigationMenu.Content>
-        </NavigationMenu.Item>
-    </NavigationMenu.List>
-</NavigationMenu.Root> -->
