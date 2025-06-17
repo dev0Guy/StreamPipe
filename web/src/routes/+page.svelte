@@ -1,7 +1,7 @@
 <script>
   import "@xyflow/svelte/dist/style.css";
   import { Background, SvelteFlow } from "@xyflow/svelte";
-  import Node from "$lib/components/ui/flow/Node.svelte";
+  import Node from "$lib/components/ui/pipeline/Node.svelte";
 
   let nodes = $state.raw([
     {
