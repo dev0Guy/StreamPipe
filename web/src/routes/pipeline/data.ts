@@ -16,4 +16,4 @@ export const nodes: object[] = [
 ]
 
 
-export const edges: object[] = [{ id: "e1-2", source: "1", target: "2" }]
+export const edges: object[] = [{ id: "e1-2", source: "1", target: "2", animated: true, type: "informationMovment" }]

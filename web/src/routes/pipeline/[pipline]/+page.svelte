@@ -11,6 +11,7 @@
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import NodeElement from "$lib/components/ui/pipeline/NodeElement.svelte";
   import "@xyflow/svelte/dist/style.css";
+  import InformationEdge from "$lib/components/ui/pipeline/InformationEdge.svelte";
 
   let {
     data,
@@ -24,6 +25,9 @@
   let nodes = $state.raw<Node[]>(data.nodes);
   let edges = $state.raw<Edge[]>(data.edges);
   const nodeTypes = { PiplineElement: NodeElement };
+  const edgeTypes = {
+    informationMovment: InformationEdge,
+  };
 </script>
 
 <!-- TODO: add select of dark of light mode and change the background color a cordingly -->
@@ -34,6 +38,7 @@
         bind:nodes
         bind:edges
         {nodeTypes}
+        {edgeTypes}
         fitView
         proOptions={{ hideAttribution: true }}
       >

@@ -19,8 +19,6 @@
 	let description = data.description;
 </script>
 
-<Handle type="source" position={Position.Right} {isConnectable} />
-
 <ContextMenu.Root>
 	<div on:contextmenu={(e) => e.stopPropagation()} role="presentation">
 		<ContextMenu.Trigger>
@@ -56,11 +54,11 @@
 		</ContextMenu.Trigger>
 	</div>
 	<ContextMenu.Content>
-		<ContextMenu.Item>
+		<ContextMenu.Item onclick={() => console.log("View")}>
 			<EyeIcon />
 			<span>View</span>
 		</ContextMenu.Item>
-		<ContextMenu.Item>
+		<ContextMenu.Item onclick={() => console.log("Edit")}>
 			<PencilIcon />
 			<span>Edit</span>
 		</ContextMenu.Item>
@@ -72,8 +70,9 @@
 		</ContextMenu.Item>
 	</ContextMenu.Content>
 </ContextMenu.Root>
+<Handle type="source" position={Position.Left} {isConnectable} />
 
-<Handle type="source" position={Position.Right} {isConnectable} />
+<Handle type="target" position={Position.Right} {isConnectable} />
 
 <!-- <div
 					class="bg-zinc-200 dark:bg-zinc-800 p-4 h-full flex items-center justify-center"

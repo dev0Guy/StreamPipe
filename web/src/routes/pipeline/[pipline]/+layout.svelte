@@ -41,12 +41,9 @@
 
 {@render children()}
 <NavigationMenu.Root
-    class="absolute top-0 left-0 w-full bg-transperent px-4 py-4"
+    class="fixed top-0 left-1/2 transform -translate-x-1/2  py-4 flex justify-center"
 >
     <NavigationMenu.List class="flex items-center justify-between gap-4">
-        <NavigationMenu.Item>
-            <ToggleModeToggle />
-        </NavigationMenu.Item>
         <NavigationMenu.Item>
             <Combobox
                 {options}
@@ -66,6 +63,9 @@
                     <Search />
                 </Button>
             </NavigationMenu.Link>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item>
+            <ToggleModeToggle />
         </NavigationMenu.Item>
     </NavigationMenu.List>
 </NavigationMenu.Root>
